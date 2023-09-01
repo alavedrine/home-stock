@@ -31,16 +31,15 @@ public class ItemRepository {
                 .set(ITEM.NAME, command.name())
                 .set(ITEM.DESCRIPTION, command.description())
                 .set(ITEM.QUANTITY, command.quantity())
-                .set(ITEM.EXPIRATION_DATE, command.expirationDate())
+                .set(ITEM.PERCENTAGE_QUANTITY, command.percentageQuantity())
+                .set(ITEM.STOCK_LIMIT, command.stockLimit())
                 .set(ITEM.DATE_CREATED, command.dateCreated())
                 .set(ITEM.LAST_UPDATED, command.lastUpdated())
                 .execute();
     }
 
-
     public Optional<Item> findById(Integer id) {
         logger.debug("Find item with id: '%s'".formatted(id));
-
         return jooq
                 .selectFrom(ITEM)
                 .where(ITEM.ID.eq(id))
@@ -67,9 +66,11 @@ public class ItemRepository {
         return Item.fromDb(
                 r.getId(),
                 r.getCategoryId(),
-                r.getName(), r.getDescription(),
+                r.getName(),
+                r.getDescription(),
                 r.getQuantity(),
-                r.getExpirationDate(),
+                r.getPercentageQuantity(),
+                r.getStockLimit(),
                 r.getDateCreated(),
                 r.getLastUpdated());
     }

@@ -5,7 +5,6 @@ package net.lavedrine.jooq.generated.tables;
 
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -15,14 +14,15 @@ import net.lavedrine.jooq.generated.Keys;
 import net.lavedrine.jooq.generated.Public;
 import net.lavedrine.jooq.generated.tables.records.ItemRecord;
 
+import org.jooq.Check;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function8;
+import org.jooq.Function9;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row8;
+import org.jooq.Row9;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -30,6 +30,7 @@ import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
+import org.jooq.impl.Internal;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 
@@ -76,14 +77,19 @@ public class JItem extends TableImpl<ItemRecord> {
     public final TableField<ItemRecord, Integer> QUANTITY = createField(DSL.name("quantity"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
+     * The column <code>public.item.percentage_quantity</code>.
+     */
+    public final TableField<ItemRecord, Integer> PERCENTAGE_QUANTITY = createField(DSL.name("percentage_quantity"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>public.item.stock_limit</code>.
+     */
+    public final TableField<ItemRecord, Integer> STOCK_LIMIT = createField(DSL.name("stock_limit"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * The column <code>public.item.description</code>.
      */
     public final TableField<ItemRecord, String> DESCRIPTION = createField(DSL.name("description"), SQLDataType.CLOB, this, "");
-
-    /**
-     * The column <code>public.item.expiration_date</code>.
-     */
-    public final TableField<ItemRecord, LocalDate> EXPIRATION_DATE = createField(DSL.name("expiration_date"), SQLDataType.LOCALDATE, this, "");
 
     /**
      * The column <code>public.item.date_created</code>.
@@ -161,6 +167,13 @@ public class JItem extends TableImpl<ItemRecord> {
     }
 
     @Override
+    public List<Check<ItemRecord>> getChecks() {
+        return Arrays.asList(
+            Internal.createCheck(this, DSL.name("percentage_quantity_limit"), "(((percentage_quantity > 0) AND (percentage_quantity < 100)))", true)
+        );
+    }
+
+    @Override
     public JItem as(String alias) {
         return new JItem(DSL.name(alias), this);
     }
@@ -200,18 +213,18 @@ public class JItem extends TableImpl<ItemRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row8 type methods
+    // Row9 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<Integer, Integer, String, Integer, String, LocalDate, Instant, Instant> fieldsRow() {
-        return (Row8) super.fieldsRow();
+    public Row9<Integer, Integer, String, Integer, Integer, Integer, String, Instant, Instant> fieldsRow() {
+        return (Row9) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function8<? super Integer, ? super Integer, ? super String, ? super Integer, ? super String, ? super LocalDate, ? super Instant, ? super Instant, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function9<? super Integer, ? super Integer, ? super String, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -219,7 +232,7 @@ public class JItem extends TableImpl<ItemRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super Integer, ? super Integer, ? super String, ? super Integer, ? super String, ? super LocalDate, ? super Instant, ? super Instant, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function9<? super Integer, ? super Integer, ? super String, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

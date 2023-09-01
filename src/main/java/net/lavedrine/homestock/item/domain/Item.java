@@ -1,54 +1,54 @@
 package net.lavedrine.homestock.item.domain;
 
 import java.time.Instant;
-import java.time.LocalDate;
 
 public class Item {
     private final Integer id;
-    private final Integer subCategoryId;
+    private final Integer categoryId;
     private final String name;
     private final String description;
     private final Integer quantity;
-    private final LocalDate expirationDate;
+    private final Integer percentageQuantity;
+    private final Integer stockLimit;
     private final Instant dateCreated;
     private final Instant lastUpdated;
 
-    public Item(Integer id,
-                Integer subCategoryId,
-                String name,
-                String description,
-                Integer quantity,
-                LocalDate expirationDate,
-                Instant dateCreated,
-                Instant lastUpdated) {
+    private Item(Integer id,
+                 Integer categoryId,
+                 String name,
+                 String description,
+                 Integer quantity,
+                 Integer percentageQuantity,
+                 Integer stockLimit,
+                 Instant dateCreated,
+                 Instant lastUpdated) {
         this.id = id;
-        this.subCategoryId = subCategoryId;
+        this.categoryId = categoryId;
         this.name = name;
         this.description = description;
         this.quantity = quantity;
-        this.expirationDate = expirationDate;
+        this.percentageQuantity = percentageQuantity;
+        this.stockLimit = stockLimit;
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
     }
 
     public static Item fromDb(Integer id,
-                              Integer subCategoryId,
+                              Integer categoryId,
                               String name,
                               String description,
                               Integer quantity,
-                              LocalDate expirationDate,
+                              Integer percentageQuantity,
+                              Integer stockLimit,
                               Instant dateCreated,
                               Instant lastUpdated) {
-        return new Item(id, subCategoryId, name, description, quantity, expirationDate, dateCreated, lastUpdated);
+        return new Item(id, categoryId, name, description, quantity,
+                percentageQuantity, stockLimit, dateCreated, lastUpdated);
     }
 
 
     public Integer getId() {
         return id;
-    }
-
-    public Integer getSubCategoryId() {
-        return subCategoryId;
     }
 
     public String getName() {
@@ -63,15 +63,23 @@ public class Item {
         return quantity;
     }
 
-    public LocalDate getExpirationDate() {
-        return expirationDate;
-    }
-
     public Instant getDateCreated() {
         return dateCreated;
     }
 
     public Instant getLastUpdated() {
         return lastUpdated;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public Integer getPercentageQuantity() {
+        return percentageQuantity;
+    }
+
+    public Integer getStockLimit() {
+        return stockLimit;
     }
 }

@@ -1,6 +1,5 @@
 package net.lavedrine.homestock.item.controller;
 
-import net.lavedrine.homestock.item.command.CreateItemCommand;
 import net.lavedrine.homestock.item.dto.ItemDtoMapper;
 import net.lavedrine.homestock.item.dto.ItemInDto;
 import net.lavedrine.homestock.item.dto.ItemOutDto;
@@ -9,6 +8,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static net.lavedrine.homestock.item.command.CreateItemCommand.createNewItemCommand;
 
 @RestController
 @RequestMapping("/api/items")
@@ -23,14 +24,13 @@ public class ItemController {
     @PostMapping("/{categoryId}/create")
     public void create(@PathVariable Integer categoryId,
                        @RequestBody @NonNull ItemInDto itemInDto) {
-        CreateItemCommand command = CreateItemCommand.createNewItemCommand(
+        service.create(createNewItemCommand(
                 categoryId,
                 itemInDto.name(),
                 itemInDto.description(),
                 itemInDto.quantity(),
-                itemInDto.expirationDate());
-
-        service.create(command);
+                itemInDto.percentageQuantity(),
+                itemInDto.stockLimit()));
     }
 
     @GetMapping("/{categoryId}")
