@@ -10,7 +10,6 @@ public class ItemDtoMapper {
                 item.getName(),
                 item.getDescription(),
                 item.getQuantity(),
-                item.getExpirationDate(),
                 item.getDateCreated(),
                 item.getLastUpdated());
     }

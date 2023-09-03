@@ -55,6 +55,11 @@ public class CategoryRepository {
         return jooq.selectFrom(CATEGORY).fetchSet(this::mapFromRecord);
     }
 
+    public void delete(Integer categoryId) {
+        logger.debug("Delete category %s".formatted(categoryId));
+        jooq.deleteFrom(CATEGORY).where(CATEGORY.ID.eq(categoryId)).execute();
+    }
+
     private Category mapFromRecord(CategoryRecord categoryRecord) {
         return Category.fromDb(
                 categoryRecord.getId(),

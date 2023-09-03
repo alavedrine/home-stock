@@ -34,4 +34,9 @@ public class CategoryController {
                 .map(CategoryDtoMapper::toOutDto)
                 .toList();
     }
+
+    @PostMapping("/{categoryId}/delete")
+    public void delete(@PathVariable Integer categoryId) {
+        service.delete(categoryId);
+    }
 }

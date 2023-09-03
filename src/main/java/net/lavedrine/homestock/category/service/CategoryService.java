@@ -32,4 +32,8 @@ public class CategoryService {
     public Set<Category> getAll() {
         return repository.getAll();
     }
+
+    public void delete(Integer categoryId) {
+        repository.delete(categoryId);
+    }
 }
