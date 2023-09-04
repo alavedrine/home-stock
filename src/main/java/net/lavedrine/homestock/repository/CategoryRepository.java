@@ -23,12 +23,13 @@ public class CategoryRepository {
         this.jooq = jooq;
     }
 
-    public void insert(CreateCategoryCommand category) {
+    public void insert(Integer homeId, CreateCategoryCommand category) {
         logger.debug(String.format("Insert category with name: '%s', description: '%s'", category.name(), category.description()));
         jooq.insertInto(CATEGORY)
                 .set(CATEGORY.NAME, category.name())
                 .set(CATEGORY.DESCRIPTION, category.description())
                 .set(CATEGORY.PARENT_ID, category.parentId())
+                .set(CATEGORY.HOME_ID, homeId)
                 .execute();
     }
 
@@ -50,14 +51,19 @@ public class CategoryRepository {
                 .map(this::mapFromRecord);
     }
 
-    public Set<Category> getAll() {
+    public Set<Category> getAll(Integer homeId) {
         logger.debug("Get all categories");
-        return jooq.selectFrom(CATEGORY).fetchSet(this::mapFromRecord);
+        return jooq.selectFrom(CATEGORY)
+                .where(CATEGORY.HOME_ID.eq(homeId))
+                .fetchSet(this::mapFromRecord);
     }
 
-    public void delete(Integer categoryId) {
+    public void delete(Integer homeId, Integer categoryId) {
         logger.debug("Delete category %s".formatted(categoryId));
-        jooq.deleteFrom(CATEGORY).where(CATEGORY.ID.eq(categoryId)).execute();
+        jooq.deleteFrom(CATEGORY)
+                .where(CATEGORY.ID.eq(categoryId))
+                .and(CATEGORY.HOME_ID.eq(homeId))
+                .execute();
     }
 
     private Category mapFromRecord(CategoryRecord categoryRecord) {
@@ -65,7 +71,8 @@ public class CategoryRepository {
                 categoryRecord.getId(),
                 categoryRecord.getParentId(),
                 categoryRecord.getName(),
-                categoryRecord.getDescription()
+                categoryRecord.getDescription(),
+                categoryRecord.getHomeId()
         );
     }
 }

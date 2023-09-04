@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.lavedrine.jooq.generated.tables.JCategory;
+import net.lavedrine.jooq.generated.tables.JHome;
 import net.lavedrine.jooq.generated.tables.JItem;
 
 import org.jooq.Catalog;
@@ -34,6 +35,11 @@ public class Public extends SchemaImpl {
     public final JCategory CATEGORY = JCategory.CATEGORY;
 
     /**
+     * The table <code>public.home</code>.
+     */
+    public final JHome HOME = JHome.HOME;
+
+    /**
      * The table <code>public.item</code>.
      */
     public final JItem ITEM = JItem.ITEM;
@@ -55,6 +61,7 @@ public class Public extends SchemaImpl {
     public final List<Table<?>> getTables() {
         return Arrays.asList(
             JCategory.CATEGORY,
+            JHome.HOME,
             JItem.ITEM
         );
     }

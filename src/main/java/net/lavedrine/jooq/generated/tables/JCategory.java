@@ -14,12 +14,12 @@ import net.lavedrine.jooq.generated.tables.records.CategoryRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function4;
+import org.jooq.Function5;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row4;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -61,6 +61,11 @@ public class JCategory extends TableImpl<CategoryRecord> {
      * The column <code>public.category.parent_id</code>.
      */
     public final TableField<CategoryRecord, Integer> PARENT_ID = createField(DSL.name("parent_id"), SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>public.category.home_id</code>.
+     */
+    public final TableField<CategoryRecord, Integer> HOME_ID = createField(DSL.name("home_id"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>public.category.name</code>.
@@ -121,16 +126,12 @@ public class JCategory extends TableImpl<CategoryRecord> {
     }
 
     @Override
-    public List<UniqueKey<CategoryRecord>> getUniqueKeys() {
-        return Arrays.asList(Keys.U_CATEGORY_NAME);
-    }
-
-    @Override
     public List<ForeignKey<CategoryRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.CATEGORY__FK_PARENT_CATEGORY_ID);
+        return Arrays.asList(Keys.CATEGORY__FK_PARENT_CATEGORY_ID, Keys.CATEGORY__FK_HOME_ID);
     }
 
     private transient JCategory _category;
+    private transient JHome _home;
 
     /**
      * Get the implicit join path to the <code>public.category</code> table.
@@ -140,6 +141,16 @@ public class JCategory extends TableImpl<CategoryRecord> {
             _category = new JCategory(this, Keys.CATEGORY__FK_PARENT_CATEGORY_ID);
 
         return _category;
+    }
+
+    /**
+     * Get the implicit join path to the <code>public.home</code> table.
+     */
+    public JHome home() {
+        if (_home == null)
+            _home = new JHome(this, Keys.CATEGORY__FK_HOME_ID);
+
+        return _home;
     }
 
     @Override
@@ -182,18 +193,18 @@ public class JCategory extends TableImpl<CategoryRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Integer, Integer, String, String> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row5<Integer, Integer, Integer, String, String> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function4<? super Integer, ? super Integer, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function5<? super Integer, ? super Integer, ? super Integer, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -201,7 +212,7 @@ public class JCategory extends TableImpl<CategoryRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super Integer, ? super Integer, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Integer, ? super Integer, ? super Integer, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

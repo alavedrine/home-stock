@@ -19,8 +19,8 @@ public class CategoryService {
     }
 
     @Transactional
-    public void insert(CategoryInDto categoryInDto) {
-        repository.insert(CategoryDtoMapper.toCommand(categoryInDto));
+    public void insert(Integer homeId, CategoryInDto categoryInDto) {
+        repository.insert(homeId, CategoryDtoMapper.toCommand(categoryInDto));
     }
 
     @Transactional(readOnly = true)
@@ -29,11 +29,12 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = true)
-    public Set<Category> getAll() {
-        return repository.getAll();
+    public Set<Category> getAll(Integer homeId) {
+        return repository.getAll(homeId);
     }
 
-    public void delete(Integer categoryId) {
-        repository.delete(categoryId);
+    @Transactional
+    public void delete(Integer homeId, Integer categoryId) {
+        repository.delete(homeId, categoryId);
     }
 }

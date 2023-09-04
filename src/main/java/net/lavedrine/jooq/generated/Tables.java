@@ -5,6 +5,7 @@ package net.lavedrine.jooq.generated;
 
 
 import net.lavedrine.jooq.generated.tables.JCategory;
+import net.lavedrine.jooq.generated.tables.JHome;
 import net.lavedrine.jooq.generated.tables.JItem;
 
 
@@ -18,6 +19,11 @@ public class Tables {
      * The table <code>public.category</code>.
      */
     public static final JCategory CATEGORY = JCategory.CATEGORY;
+
+    /**
+     * The table <code>public.home</code>.
+     */
+    public static final JHome HOME = JHome.HOME;
 
     /**
      * The table <code>public.item</code>.

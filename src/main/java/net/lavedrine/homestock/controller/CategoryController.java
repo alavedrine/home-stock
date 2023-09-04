@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/api/homes/{homeId}/categories")
 public class CategoryController {
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
@@ -22,21 +22,23 @@ public class CategoryController {
     }
 
     @PostMapping("/create")
-    public void create(@RequestBody CategoryInDto categoryInDto) {
+    public void create(@PathVariable Integer homeId,
+                       @RequestBody CategoryInDto categoryInDto) {
         logger.info("Creating new category {}", categoryInDto);
-        service.insert(categoryInDto);
+        service.insert(homeId, categoryInDto);
     }
 
     @GetMapping
-    public List<CategoryOutDto> getAll() {
-        return service.getAll()
+    public List<CategoryOutDto> getAll(@PathVariable Integer homeId) {
+        return service.getAll(homeId)
                 .stream()
                 .map(CategoryDtoMapper::toOutDto)
                 .toList();
     }
 
     @PostMapping("/{categoryId}/delete")
-    public void delete(@PathVariable Integer categoryId) {
-        service.delete(categoryId);
+    public void delete(@PathVariable Integer homeId,
+                       @PathVariable Integer categoryId) {
+        service.delete(homeId, categoryId);
     }
 }

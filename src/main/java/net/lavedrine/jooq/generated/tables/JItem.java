@@ -17,12 +17,12 @@ import net.lavedrine.jooq.generated.tables.records.ItemRecord;
 import org.jooq.Check;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function9;
+import org.jooq.Function10;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row9;
+import org.jooq.Row10;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -60,6 +60,11 @@ public class JItem extends TableImpl<ItemRecord> {
      * The column <code>public.item.id</code>.
      */
     public final TableField<ItemRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
+
+    /**
+     * The column <code>public.item.home_id</code>.
+     */
+    public final TableField<ItemRecord, Integer> HOME_ID = createField(DSL.name("home_id"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>public.item.category_id</code>.
@@ -151,10 +156,21 @@ public class JItem extends TableImpl<ItemRecord> {
 
     @Override
     public List<ForeignKey<ItemRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.ITEM__FK_CATEGORY_ID);
+        return Arrays.asList(Keys.ITEM__FK_HOME_ID, Keys.ITEM__FK_CATEGORY_ID);
     }
 
+    private transient JHome _home;
     private transient JCategory _category;
+
+    /**
+     * Get the implicit join path to the <code>public.home</code> table.
+     */
+    public JHome home() {
+        if (_home == null)
+            _home = new JHome(this, Keys.ITEM__FK_HOME_ID);
+
+        return _home;
+    }
 
     /**
      * Get the implicit join path to the <code>public.category</code> table.
@@ -213,18 +229,18 @@ public class JItem extends TableImpl<ItemRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row9 type methods
+    // Row10 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row9<Integer, Integer, String, Integer, Integer, Integer, String, Instant, Instant> fieldsRow() {
-        return (Row9) super.fieldsRow();
+    public Row10<Integer, Integer, Integer, String, Integer, Integer, Integer, String, Instant, Instant> fieldsRow() {
+        return (Row10) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function9<? super Integer, ? super Integer, ? super String, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function10<? super Integer, ? super Integer, ? super Integer, ? super String, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -232,7 +248,7 @@ public class JItem extends TableImpl<ItemRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function9<? super Integer, ? super Integer, ? super String, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function10<? super Integer, ? super Integer, ? super Integer, ? super String, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
