@@ -1,4 +1,4 @@
-package net.lavedrine.homestock.item.exception;
+package net.lavedrine.homestock.exception;
 
 public class ItemNotFoundException extends RuntimeException {
 

@@ -1,4 +1,4 @@
-package net.lavedrine.homestock.item.command;
+package net.lavedrine.homestock.command;
 
 import java.time.Instant;
 

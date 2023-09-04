@@ -1,4 +1,4 @@
-package net.lavedrine.homestock.category.exception;
+package net.lavedrine.homestock.exception;
 
 public class CategoryNotFoundException extends RuntimeException {
 

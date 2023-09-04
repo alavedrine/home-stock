@@ -1,7 +1,7 @@
-package net.lavedrine.homestock.category.repository;
+package net.lavedrine.homestock.repository;
 
-import net.lavedrine.homestock.category.command.CreateCategoryCommand;
-import net.lavedrine.homestock.category.domain.Category;
+import net.lavedrine.homestock.command.CreateCategoryCommand;
+import net.lavedrine.homestock.domain.Category;
 import net.lavedrine.jooq.generated.tables.records.CategoryRecord;
 import org.jooq.DSLContext;
 import org.slf4j.Logger;
@@ -34,9 +34,9 @@ public class CategoryRepository {
 
     public void update(Category category) {
         jooq.update(CATEGORY)
-                .set(CATEGORY.NAME, category.getName())
-                .set(CATEGORY.DESCRIPTION, category.getDescription())
-                .where(CATEGORY.ID.eq(category.getId()))
+                .set(CATEGORY.NAME, category.name())
+                .set(CATEGORY.DESCRIPTION, category.description())
+                .where(CATEGORY.ID.eq(category.id()))
                 .execute();
     }
 

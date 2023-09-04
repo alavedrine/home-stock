@@ -1,10 +1,10 @@
-package net.lavedrine.homestock.category.service;
+package net.lavedrine.homestock.service;
 
-import net.lavedrine.homestock.category.domain.Category;
-import net.lavedrine.homestock.category.dto.CategoryDtoMapper;
-import net.lavedrine.homestock.category.dto.CategoryInDto;
-import net.lavedrine.homestock.category.exception.CategoryNotFoundException;
-import net.lavedrine.homestock.category.repository.CategoryRepository;
+import net.lavedrine.homestock.domain.Category;
+import net.lavedrine.homestock.dto.category.CategoryDtoMapper;
+import net.lavedrine.homestock.dto.category.CategoryInDto;
+import net.lavedrine.homestock.exception.CategoryNotFoundException;
+import net.lavedrine.homestock.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

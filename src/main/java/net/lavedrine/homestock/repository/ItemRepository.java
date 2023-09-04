@@ -1,7 +1,7 @@
-package net.lavedrine.homestock.item.repository;
+package net.lavedrine.homestock.repository;
 
-import net.lavedrine.homestock.item.command.CreateItemCommand;
-import net.lavedrine.homestock.item.domain.Item;
+import net.lavedrine.homestock.command.CreateItemCommand;
+import net.lavedrine.homestock.domain.Item;
 import net.lavedrine.jooq.generated.tables.records.ItemRecord;
 import org.jooq.DSLContext;
 import org.slf4j.Logger;

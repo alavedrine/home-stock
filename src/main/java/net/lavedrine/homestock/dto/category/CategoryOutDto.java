@@ -1,4 +1,4 @@
-package net.lavedrine.homestock.category.dto;
+package net.lavedrine.homestock.dto.category;
 
 public record CategoryOutDto(Integer id,
                              Integer parentId,

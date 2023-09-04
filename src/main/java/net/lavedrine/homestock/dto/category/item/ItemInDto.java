@@ -1,4 +1,4 @@
-package net.lavedrine.homestock.item.dto;
+package net.lavedrine.homestock.dto.category.item;
 
 public record ItemInDto(String name,
                         String description,

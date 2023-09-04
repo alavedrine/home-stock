@@ -1,9 +1,9 @@
-package net.lavedrine.homestock.category.controller;
+package net.lavedrine.homestock.controller;
 
-import net.lavedrine.homestock.category.dto.CategoryDtoMapper;
-import net.lavedrine.homestock.category.dto.CategoryInDto;
-import net.lavedrine.homestock.category.dto.CategoryOutDto;
-import net.lavedrine.homestock.category.service.CategoryService;
+import net.lavedrine.homestock.dto.category.CategoryDtoMapper;
+import net.lavedrine.homestock.dto.category.CategoryInDto;
+import net.lavedrine.homestock.dto.category.CategoryOutDto;
+import net.lavedrine.homestock.service.CategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;

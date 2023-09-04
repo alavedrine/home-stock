@@ -1,15 +1,15 @@
-package net.lavedrine.homestock.item.controller;
+package net.lavedrine.homestock.controller;
 
-import net.lavedrine.homestock.item.dto.ItemDtoMapper;
-import net.lavedrine.homestock.item.dto.ItemInDto;
-import net.lavedrine.homestock.item.dto.ItemOutDto;
-import net.lavedrine.homestock.item.service.ItemService;
+import net.lavedrine.homestock.dto.category.item.ItemDtoMapper;
+import net.lavedrine.homestock.dto.category.item.ItemInDto;
+import net.lavedrine.homestock.dto.category.item.ItemOutDto;
+import net.lavedrine.homestock.service.ItemService;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static net.lavedrine.homestock.item.command.CreateItemCommand.createNewItemCommand;
+import static net.lavedrine.homestock.command.CreateItemCommand.createNewItemCommand;
 
 @RestController
 @RequestMapping("/api/items")

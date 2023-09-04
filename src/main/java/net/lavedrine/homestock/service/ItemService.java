@@ -1,9 +1,8 @@
-package net.lavedrine.homestock.item.service;
+package net.lavedrine.homestock.service;
 
-import net.lavedrine.homestock.item.command.CreateItemCommand;
-import net.lavedrine.homestock.item.domain.Item;
-import net.lavedrine.homestock.item.exception.ItemNotFoundException;
-import net.lavedrine.homestock.item.repository.ItemRepository;
+import net.lavedrine.homestock.command.CreateItemCommand;
+import net.lavedrine.homestock.domain.Item;
+import net.lavedrine.homestock.repository.ItemRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,10 +19,6 @@ public class ItemService {
     @Transactional
     public void create(CreateItemCommand command) {
         repository.insert(command);
-    }
-
-    private Item findById(Integer id) {
-        return repository.findById(id).orElseThrow(() -> ItemNotFoundException.itemIdNotFoundException(id));
     }
 
     @Transactional(readOnly = true)
