@@ -1,8 +1,8 @@
 package net.lavedrine.homestock.controller;
 
-import net.lavedrine.homestock.dto.category.item.ItemDtoMapper;
-import net.lavedrine.homestock.dto.category.item.ItemInDto;
-import net.lavedrine.homestock.dto.category.item.ItemOutDto;
+import net.lavedrine.homestock.dto.item.ItemDtoMapper;
+import net.lavedrine.homestock.dto.item.ItemInDto;
+import net.lavedrine.homestock.dto.item.ItemOutDto;
 import net.lavedrine.homestock.service.ItemService;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
