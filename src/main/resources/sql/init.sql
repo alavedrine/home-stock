@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS home, category, item;
 
 CREATE TABLE home
 (
-    id           SERIAL                   NOT NULL,
+    id           VARCHAR(50)              NOT NULL,
     name         TEXT                     NOT NULL,
     date_created TIMESTAMP WITH TIME ZONE NOT NULL,
     last_updated TIMESTAMP WITH TIME ZONE NOT NULL,
@@ -11,10 +11,10 @@ CREATE TABLE home
 
 CREATE TABLE category
 (
-    id          SERIAL  NOT NULL,
+    id          SERIAL      NOT NULL,
     parent_id   INTEGER,
-    home_id     INTEGER NOT NULL,
-    name        TEXT    NOT NULL,
+    home_id     VARCHAR(50) NOT NULL,
+    name        TEXT        NOT NULL,
     description TEXT,
     CONSTRAINT pk_category_id PRIMARY KEY (id),
     CONSTRAINT fk_parent_category_id FOREIGN KEY (parent_id) REFERENCES category (id),
@@ -24,7 +24,7 @@ CREATE TABLE category
 CREATE TABLE item
 (
     id                  SERIAL                   NOT NULL,
-    home_id             INTEGER                  NOT NULL,
+    home_id             VARCHAR(50)              NOT NULL,
     category_id         INTEGER                  NOT NULL,
     name                TEXT                     NOT NULL,
     quantity            INTEGER                  NOT NULL,

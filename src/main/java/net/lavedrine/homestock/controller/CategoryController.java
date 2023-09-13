@@ -22,14 +22,14 @@ public class CategoryController {
     }
 
     @PostMapping("/create")
-    public void create(@PathVariable Integer homeId,
+    public void create(@PathVariable String homeId,
                        @RequestBody CategoryInDto categoryInDto) {
         logger.info("Creating new category {}", categoryInDto);
         service.insert(homeId, categoryInDto);
     }
 
     @GetMapping
-    public List<CategoryOutDto> getAll(@PathVariable Integer homeId) {
+    public List<CategoryOutDto> getAll(@PathVariable String homeId) {
         return service.getAll(homeId)
                 .stream()
                 .map(CategoryDtoMapper::toOutDto)
@@ -37,7 +37,7 @@ public class CategoryController {
     }
 
     @PostMapping("/{categoryId}/delete")
-    public void delete(@PathVariable Integer homeId,
+    public void delete(@PathVariable String homeId,
                        @PathVariable Integer categoryId) {
         service.delete(homeId, categoryId);
     }

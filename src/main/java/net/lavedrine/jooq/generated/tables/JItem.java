@@ -64,7 +64,7 @@ public class JItem extends TableImpl<ItemRecord> {
     /**
      * The column <code>public.item.home_id</code>.
      */
-    public final TableField<ItemRecord, Integer> HOME_ID = createField(DSL.name("home_id"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<ItemRecord, String> HOME_ID = createField(DSL.name("home_id"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
      * The column <code>public.item.category_id</code>.
@@ -233,14 +233,14 @@ public class JItem extends TableImpl<ItemRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row10<Integer, Integer, Integer, String, Integer, Integer, Integer, String, Instant, Instant> fieldsRow() {
+    public Row10<Integer, String, Integer, String, Integer, Integer, Integer, String, Instant, Instant> fieldsRow() {
         return (Row10) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function10<? super Integer, ? super Integer, ? super Integer, ? super String, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function10<? super Integer, ? super String, ? super Integer, ? super String, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -248,7 +248,7 @@ public class JItem extends TableImpl<ItemRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function10<? super Integer, ? super Integer, ? super Integer, ? super String, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function10<? super Integer, ? super String, ? super Integer, ? super String, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

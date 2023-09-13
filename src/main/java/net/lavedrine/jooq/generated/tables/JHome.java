@@ -15,7 +15,6 @@ import net.lavedrine.jooq.generated.tables.records.HomeRecord;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Function4;
-import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
@@ -55,7 +54,7 @@ public class JHome extends TableImpl<HomeRecord> {
     /**
      * The column <code>public.home.id</code>.
      */
-    public final TableField<HomeRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
+    public final TableField<HomeRecord, String> ID = createField(DSL.name("id"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
      * The column <code>public.home.name</code>.
@@ -111,11 +110,6 @@ public class JHome extends TableImpl<HomeRecord> {
     }
 
     @Override
-    public Identity<HomeRecord, Integer> getIdentity() {
-        return (Identity<HomeRecord, Integer>) super.getIdentity();
-    }
-
-    @Override
     public UniqueKey<HomeRecord> getPrimaryKey() {
         return Keys.PK_HOME_ID;
     }
@@ -164,14 +158,14 @@ public class JHome extends TableImpl<HomeRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Integer, String, Instant, Instant> fieldsRow() {
+    public Row4<String, String, Instant, Instant> fieldsRow() {
         return (Row4) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function4<? super Integer, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function4<? super String, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -179,7 +173,7 @@ public class JHome extends TableImpl<HomeRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super Integer, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super String, ? super String, ? super Instant, ? super Instant, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

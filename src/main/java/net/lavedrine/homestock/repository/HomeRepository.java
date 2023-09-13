@@ -18,8 +18,9 @@ public class HomeRepository {
         this.jooq = jooq;
     }
 
-    public void create(String name, Instant dateCreated) {
+    public void create(String homeId, String name, Instant dateCreated) {
         jooq.insertInto(HOME)
+                .set(HOME.ID, homeId)
                 .set(HOME.NAME, name)
                 .set(HOME.DATE_CREATED, dateCreated)
                 .set(HOME.LAST_UPDATED, dateCreated)
@@ -28,6 +29,12 @@ public class HomeRepository {
 
     public List<Home> getHomes() {
         return jooq.selectFrom(HOME).fetch(this::mapFromRecord);
+    }
+
+    public Home getHome(String id) {
+        return jooq.selectFrom(HOME)
+                .where(HOME.ID.eq(id))
+                .fetchOne(this::mapFromRecord);
     }
 
     private Home mapFromRecord(HomeRecord homeRecord) {

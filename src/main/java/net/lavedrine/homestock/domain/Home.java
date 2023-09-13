@@ -4,8 +4,8 @@ import net.lavedrine.homestock.dto.home.HomeOutDto;
 
 import java.time.Instant;
 
-public record Home(Integer id, String name, Instant dateCreated, Instant lastUpdated) {
-    public static Home fromDb(Integer id, String name, Instant dateCreated, Instant lastUpdated) {
+public record Home(String id, String name, Instant dateCreated, Instant lastUpdated) {
+    public static Home fromDb(String id, String name, Instant dateCreated, Instant lastUpdated) {
         return new Home(id, name, dateCreated, lastUpdated);
     }
 

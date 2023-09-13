@@ -65,7 +65,7 @@ public class JCategory extends TableImpl<CategoryRecord> {
     /**
      * The column <code>public.category.home_id</code>.
      */
-    public final TableField<CategoryRecord, Integer> HOME_ID = createField(DSL.name("home_id"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<CategoryRecord, String> HOME_ID = createField(DSL.name("home_id"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
      * The column <code>public.category.name</code>.
@@ -197,14 +197,14 @@ public class JCategory extends TableImpl<CategoryRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Integer, Integer, Integer, String, String> fieldsRow() {
+    public Row5<Integer, Integer, String, String, String> fieldsRow() {
         return (Row5) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function5<? super Integer, ? super Integer, ? super Integer, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function5<? super Integer, ? super Integer, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -212,7 +212,7 @@ public class JCategory extends TableImpl<CategoryRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Integer, ? super Integer, ? super Integer, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Integer, ? super Integer, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

@@ -4,15 +4,17 @@ import net.lavedrine.homestock.domain.Home;
 import net.lavedrine.homestock.dto.home.HomeInDto;
 import net.lavedrine.homestock.dto.home.HomeOutDto;
 import net.lavedrine.homestock.service.HomeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
-@RestController("/api/homes")
+@RestController()
+@RequestMapping("/api/homes")
 public class HomeController {
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
     private final HomeService service;
 
     public HomeController(HomeService service) {
@@ -20,12 +22,19 @@ public class HomeController {
     }
 
     @PostMapping("/create")
-    public void create(@RequestBody HomeInDto dto) {
-        service.create(dto.name());
+    public void create(@RequestBody @Valid HomeInDto home) {
+        logger.debug("Received request to create new home {}", home);
+        service.create(home.name());
     }
 
     @GetMapping
     public List<HomeOutDto> getHomes() {
         return service.getHomes().stream().map(Home::toDto).toList();
+    }
+
+    @GetMapping("/{id}")
+    public HomeOutDto getHome(@PathVariable String id) {
+        logger.debug("Received request to get home with id '{}'", id);
+        return Home.toDto(service.getHome(id));
     }
 }

@@ -23,7 +23,7 @@ public class CategoryRepository {
         this.jooq = jooq;
     }
 
-    public void insert(Integer homeId, CreateCategoryCommand category) {
+    public void insert(String homeId, CreateCategoryCommand category) {
         logger.debug(String.format("Insert category with name: '%s', description: '%s'", category.name(), category.description()));
         jooq.insertInto(CATEGORY)
                 .set(CATEGORY.NAME, category.name())
@@ -51,14 +51,14 @@ public class CategoryRepository {
                 .map(this::mapFromRecord);
     }
 
-    public Set<Category> getAll(Integer homeId) {
+    public Set<Category> getAll(String homeId) {
         logger.debug("Get all categories");
         return jooq.selectFrom(CATEGORY)
                 .where(CATEGORY.HOME_ID.eq(homeId))
                 .fetchSet(this::mapFromRecord);
     }
 
-    public void delete(Integer homeId, Integer categoryId) {
+    public void delete(String homeId, Integer categoryId) {
         logger.debug("Delete category %s".formatted(categoryId));
         jooq.deleteFrom(CATEGORY)
                 .where(CATEGORY.ID.eq(categoryId))

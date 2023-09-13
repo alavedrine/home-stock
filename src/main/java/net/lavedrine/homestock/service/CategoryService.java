@@ -19,7 +19,7 @@ public class CategoryService {
     }
 
     @Transactional
-    public void insert(Integer homeId, CategoryInDto categoryInDto) {
+    public void insert(String homeId, CategoryInDto categoryInDto) {
         repository.insert(homeId, CategoryDtoMapper.toCommand(categoryInDto));
     }
 
@@ -29,12 +29,12 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = true)
-    public Set<Category> getAll(Integer homeId) {
+    public Set<Category> getAll(String homeId) {
         return repository.getAll(homeId);
     }
 
     @Transactional
-    public void delete(Integer homeId, Integer categoryId) {
+    public void delete(String homeId, Integer categoryId) {
         repository.delete(homeId, categoryId);
     }
 }
